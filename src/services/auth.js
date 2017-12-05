@@ -19,7 +19,6 @@ export default {
     setToken() {
         window.localStorage.setItem('access_token', this.getAccessTokenFromUrl().access_token)
         window.localStorage.setItem('expires', this.getAccessTokenFromUrl().expires)
-        console.log(axios.defaults.headers.common['Authorization'])
     },
     getAccessTokenFromUrl() {
         let expireDate = new Date()
