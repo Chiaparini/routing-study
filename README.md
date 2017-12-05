@@ -1,6 +1,7 @@
-# vue-route-study
+# routing-study
+vue router study using spotify API
 
-> A Vue.js project
+> A Vue.js project that uses Vue-router and Spotify API to fetch data and authorization
 
 ## Build Setup
 
