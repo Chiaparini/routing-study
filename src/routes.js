@@ -6,6 +6,7 @@ import auth from './services/auth'
 
 const requireAuth = (to, from, next) => {
     if(!auth.isAuthenticated()) {
+        auth.resetStorage()
         next({
             path: '/',
             query: { redirect: to.fullPath }
@@ -22,6 +23,13 @@ const router = new VueRouter({
         { path: '/list', component: List, beforeEnter: requireAuth },
     ],
     base: '/'
+})
+
+router.beforeEach((to, from, next) => {
+    if(!auth.isAuthenticated()) {
+        auth.resetStorage()
+    }
+    next()
 })
 
 export default router

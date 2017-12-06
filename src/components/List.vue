@@ -8,6 +8,7 @@
                 <p v-if="user.followers">followers: {{ user.followers.total }}</p>
             </div>
         </div>
+        <p class="has-text-left">showing: {{ playlists.items.length }} of {{ playlists.total }}</p>
         <div class="columns is-multiline" >
             <div class="column is-one-quarter" v-for="(playlist, index) in playlists.items" :key="playlist.id" >
                 <div class="card">
@@ -41,7 +42,8 @@
             return {
                 user: {},
                 loading: false,
-                playlists: []
+                playlists: [],
+                offset: 0,
             }
         },
         mounted() {
@@ -54,6 +56,27 @@
             spotifyApi.getUserPlaylists().then(response => {
                 this.playlists = response.data
             })
+            
+            
+        },
+        methods: {
+            handleScroll(evnt) {
+                let percentage = (((window.scrollY + window.innerHeight)/this.$el.clientHeight) * 100).toFixed()
+                console.log(percentage)
+                if(percentage > 90) {
+                    this.fillPlaylists()
+                }
+            },
+            fillPlaylists() {
+                window.removeEventListener('scroll', this.handleScroll)
+                spotifyApi.getUserPlaylists(this.offset += 4).then(response => {
+                    response.data.items.filter(el => {this.playlists.items.push(el)})
+                    window.addEventListener('scroll', this.handleScroll)                    
+                })
+            }
+        },
+        created() {
+            window.addEventListener('scroll', this.handleScroll)
         }
     }
 </script>
