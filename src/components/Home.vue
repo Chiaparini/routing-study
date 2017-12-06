@@ -14,10 +14,9 @@
 
     export default {
         name: 'Home',
-        props: ['isAuthenticated'],
         data() {
             return {
-
+                isAuthenticated: auth.isAuthenticated()
             }
         },
         mounted() {

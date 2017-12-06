@@ -22,9 +22,10 @@ export default {
     },
     getAccessTokenFromUrl() {
         let expireDate = new Date()
+        expireDate.setSeconds(window.location.hash.split('&')[2].split('=')[1])
         return {
             access_token: window.location.hash.split('&')[0].split('=')[1],
-            expires: expireDate.setSeconds(expireDate.getSeconds() + window.location.hash.split('&')[2].split('=')[1])
+            expires: expireDate
         }
     },
     isAuthenticated() {

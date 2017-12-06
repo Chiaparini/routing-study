@@ -18,8 +18,8 @@ const requireAuth = (to, from, next) => {
 
 const router = new VueRouter({
     routes: [
-        { path: '/home', component: Home, props: { isAuthenticated: auth.isAuthenticated() } },
-        { path: '/about', component: About },
+        { path: '/home', component: Home },
+        { path: '/about', component: About, beforeEnter: requireAuth },
         { path: '/list', component: List, beforeEnter: requireAuth },
     ],
     base: '/'

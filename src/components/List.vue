@@ -15,7 +15,7 @@
                 <p v-if="user.followers">followers: {{ user.followers.total }}</p>
             </div>
         </div>
-        <p class="has-text-left" v-if="playlists.items">showing: {{ playlists.items.length }} of {{ playlists.total }}</p>
+        <indicator v-if="playlists.items" :offset="playlists.items.length" :total="playlists.total"></indicator>
         <div class="columns is-multiline" >
             <div class="column is-one-quarter" v-for="(playlist, index) in playlists.items" :key="playlist.id" >
                 <div class="card">
@@ -45,8 +45,13 @@
 
 <script>
     import spotifyApi from '../services/spotify'
+    import Indicator from './Indicator'
+
     export default {
         name: 'List',
+        components: {
+            Indicator
+        },
         data() {
             return {
                 user: {},
