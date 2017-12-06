@@ -1,9 +1,6 @@
 import axios from 'axios'
 import querystring from 'querystring'
-
-const client_id = 'd8606dfebee94a349e0f19a538885a47' // Your client id
-const client_secret = '58dd06eea0214415911008bd9491e152' // Your secret
-const redirect_uri = 'http://localhost:8080/' // Your redirect uri
+import env from '../../.env'
 
 axios.defaults.headers.common['Authorization'] = "Bearer " + window.localStorage.access_token;
 
@@ -39,9 +36,9 @@ export default {
         document.cookie = 'spotify_auth_state=' + state
         let scope = "user-read-private user-read-email"
         window.location = 'https://accounts.spotify.com/authorize?' + querystring.stringify({
-            client_id: client_id,
+            client_id: env.CLIENT_ID,
             scope: scope,
-            redirect_uri: redirect_uri,
+            redirect_uri: env.REDIRECT_URI,
             state: state,
             response_type: "token",
             show_dialog: true
