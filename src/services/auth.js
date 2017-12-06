@@ -32,7 +32,7 @@ export default {
     },
     isTokenExpired() {
         const expirationDate = window.localStorage.expires
-        return expirationDate < new Date().getMilliseconds()
+        return expirationDate < new Date()
     },
     login() {
         let state = this.generateRandomString(16)

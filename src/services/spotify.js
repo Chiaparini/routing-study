@@ -6,8 +6,19 @@ export default {
     getCurrentUser() {
         return axios.get(baseUri + 'me')
     },
-    getUserPlaylists(offset = 0) {
+    getCurrentUserPlaylists(offset = 0) {
         return axios.get(baseUri + 'me/playlists', {
+            params: {
+                limit: 4,
+                offset: offset
+            }
+        })
+    },
+    getUser(id) {
+        return axios.get(baseUri + 'users/' + id)
+    },
+    getUserPlaylists(offset, id) {
+        return axios.get(baseUri + 'users/' + id + '/playlists', {
             params: {
                 limit: 4,
                 offset: offset
